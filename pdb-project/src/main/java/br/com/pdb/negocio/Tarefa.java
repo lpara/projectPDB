@@ -14,7 +14,7 @@ public class Tarefa {
 	private String descricao;
 	private Date data_abertura;
 	private Date data_fechamento;
-	private int porcetagem;
+	private int progresso;
 	private Projeto projeto;
 	private Usuario usuario_abertura;
 	private Usuario usuario_fechamento;
@@ -59,12 +59,12 @@ public class Tarefa {
 		this.data_fechamento = data_fechamento;
 	}
 
-	public int getPorcetagem() {
-		return porcetagem;
+	public int getProgresso() {
+		return progresso;
 	}
 
-	public void setPorcetagem(int porcetagem) {
-		this.porcetagem = porcetagem;
+	public void setProgresso(int porcetagem) {
+		this.progresso = porcetagem;
 	}
 
 	public Projeto getProjeto() {
