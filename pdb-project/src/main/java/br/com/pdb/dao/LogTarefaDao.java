@@ -1,5 +1,5 @@
 package br.com.pdb.dao;
 
-public class LogTarefaDao {
+public class LogTarefaDao extends GenericDao{
 
 }

@@ -7,15 +7,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import br.com.pdb.negocio.Projeto;
-import br.com.pdb.negocio.Tarefa;
-import br.com.pdb.negocio.Usuario;
+import br.com.pdb.model.Projeto;
+import br.com.pdb.model.Tarefa;
+import br.com.pdb.model.Usuario;
 
-public class TarefaDao {
+public class TarefaDao extends GenericDao {
+	
 
 	public TarefaDao (){
 		try {
-			Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pdb_project", "pdb", "pdb");
+			
+			Connection connection = getConnection();
 			connection.createStatement().executeQuery("select 1");
 			
 			Statement stm = connection.createStatement();

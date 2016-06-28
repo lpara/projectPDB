@@ -1,5 +1,5 @@
 package br.com.pdb.dao;
 
-public class UsuarioDao {
+public class UsuarioDao extends GenericDao {
 
 }

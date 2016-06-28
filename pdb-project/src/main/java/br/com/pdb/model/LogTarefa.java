@@ -1,4 +1,4 @@
-package br.com.pdb.negocio;
+package br.com.pdb.model;
 
 public class LogTarefa {
 

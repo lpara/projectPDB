@@ -4,9 +4,9 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import br.com.pdb.dao.TarefaDao;
-import br.com.pdb.negocio.Projeto;
-import br.com.pdb.negocio.Tarefa;
-import br.com.pdb.negocio.Usuario;
+import br.com.pdb.model.Projeto;
+import br.com.pdb.model.Tarefa;
+import br.com.pdb.model.Usuario;
 
 public class Aplicacao {
 
