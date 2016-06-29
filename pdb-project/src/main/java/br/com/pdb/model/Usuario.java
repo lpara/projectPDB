@@ -3,17 +3,17 @@ package br.com.pdb.model;
 public class Usuario {
 
 	/* ID, nome do usuário, e-mail e senha do usuário */
-	private int id_usuario;
+	private int id;
 	private String nome;
 	private String email;
 	private String senha;
 
-	public int getId_usuario() {
-		return id_usuario;
+	public int getId() {
+		return id;
 	}
 
-	public void setId_usuario(int id_usuario) {
-		this.id_usuario = id_usuario;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNome() {

@@ -10,17 +10,17 @@ public class LogTarefa {
 	 * (caso seja alterado no log, alterar na tarefa - tal método deve se
 	 * encontrar no LogTarefaDAO)
 	 */
-	private int id_log;
+	private int id;
 	private Tarefa tarefa;
-	private int porcetagem_tarefa;
-	private int novo_resp_tarefa;
+	private int porcetagemTarefa;
+	private int novoRespTarefa;
 
-	public int getId_log() {
-		return id_log;
+	public int getId() {
+		return id;
 	}
 
-	public void setId_log(int id_log) {
-		this.id_log = id_log;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Tarefa getTarefa() {
@@ -31,20 +31,20 @@ public class LogTarefa {
 		this.tarefa = tarefa;
 	}
 
-	public int getPorcetagem_tarefa() {
-		return porcetagem_tarefa;
+	public int getPorcetagemTarefa() {
+		return porcetagemTarefa;
 	}
 
-	public void setPorcetagem_tarefa(int porcetagem_tarefa) {
-		this.porcetagem_tarefa = porcetagem_tarefa;
+	public void setPorcetagemTarefa(int porcetagemTarefa) {
+		this.porcetagemTarefa = porcetagemTarefa;
 	}
 
-	public int getNovo_resp_tarefa() {
-		return novo_resp_tarefa;
+	public int getNovoRespTarefa() {
+		return novoRespTarefa;
 	}
 
-	public void setNovo_resp_tarefa(int novo_resp_tarefa) {
-		this.novo_resp_tarefa = novo_resp_tarefa;
+	public void setNovoRespTarefa(int novoRespTarefa) {
+		this.novoRespTarefa = novoRespTarefa;
 	}
 
 }
