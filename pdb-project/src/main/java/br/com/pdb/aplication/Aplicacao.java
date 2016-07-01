@@ -149,7 +149,7 @@ public class Aplicacao {
 			if(tarefa != null){
 				LogTarefa logTarefa = new LogTarefa();
 				
-				logTarefa.setNovoRespTarefa(tarefa.getUsuarioResponsavel().getId());
+				logTarefa.setNovoRespTarefa(1);
 				logTarefa.setTarefa(tarefa);
 				logTarefa.setPorcetagemTarefa(30);
 				logTarefa.setMensagemLog("Mensagem Log 30%");
@@ -171,7 +171,7 @@ public class Aplicacao {
 			if(tarefa != null){
 				LogTarefa logTarefa = new LogTarefa();
 				
-				logTarefa.setNovoRespTarefa(tarefa.getUsuarioResponsavel().getId());
+				logTarefa.setNovoRespTarefa(1);
 				logTarefa.setTarefa(tarefa);
 				logTarefa.setPorcetagemTarefa(100);
 				logTarefa.setMensagemLog("Mensagem Log 100%");
