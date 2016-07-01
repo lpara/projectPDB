@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import br.com.pdb.model.LogTarefa;
 import br.com.pdb.model.Tarefa;
@@ -25,7 +26,8 @@ public class LogTarefaDao extends GenericDao {
 					+ "id_log_tarefa serial not null, " + 
 					 "id_tarefa int not null, " +
 					 "porcentagem_tarefa int, " +
-					 "novo_resp_tarefa int, "+
+					 "novo_resp_tarefa int, " +
+					 "mensagem_log varchar(200), " +
 					 "PRIMARY KEY(id_log_tarefa))";
 			stm.executeUpdate(createLogTarefa);
 		} catch (SQLException e) {
@@ -39,21 +41,22 @@ public class LogTarefaDao extends GenericDao {
 		try {
 			connection = getConnection();
 		
-			PreparedStatement stm = connection.prepareStatement("INSERT INTO log_tarefa (id_tarefa, porcentagem_tarefa, novo_resp_tarefa) "
-																				+ "VALUES (?,?,?)");
+			PreparedStatement stm = connection.prepareStatement("INSERT INTO log_tarefa (id_tarefa, porcentagem_tarefa, novo_resp_tarefa, mensagem_log) "
+																				+ "VALUES (?,?,?,?)");
 			stm.setInt(1, logTarefa.getTarefa().getId());
 			stm.setInt(2, logTarefa.getPorcetagemTarefa());
 			if(logTarefa.getNovoRespTarefa() > 0)
 				stm.setInt(3, logTarefa.getNovoRespTarefa()); 
 			else
 				stm.setDate(3, null);
+			stm.setString(4, logTarefa.getMensagemLog());
 			
 			stm.executeUpdate();
 			
-			//chama metodo para atualizar o log
+			//chama metodo para atualizar a tarefa pelo log
 			String updateSql = "UPDATE public.tarefa SET progresso = ? ";
 			if(logTarefa.getNovoRespTarefa() > 0 && logTarefa.getPorcetagemTarefa() == 100)
-				updateSql += ", id_usuario_responsavel = ? , id_usuario_fechamento = ? ";
+				updateSql += ", id_usuario_responsavel = ? , id_usuario_fechamento = ?, data_fechamento = ? ";
 			else if(logTarefa.getNovoRespTarefa() > 0)
 				updateSql += ", id_usuario_responsavel = ? ";
 					
@@ -63,7 +66,9 @@ public class LogTarefaDao extends GenericDao {
 			if(logTarefa.getNovoRespTarefa() > 0 && logTarefa.getPorcetagemTarefa() == 100){
 				stmUpdateTarefa.setInt(2, logTarefa.getNovoRespTarefa());
 				stmUpdateTarefa.setInt(3, logTarefa.getNovoRespTarefa());
-				stmUpdateTarefa.setInt(4, logTarefa.getTarefa().getId());
+				Date hoje = new Date();
+				stmUpdateTarefa.setDate(4, new java.sql.Date(hoje.getTime()));
+				stmUpdateTarefa.setInt(5, logTarefa.getTarefa().getId());
 			}else if(logTarefa.getNovoRespTarefa() > 0){
 				stmUpdateTarefa.setInt(2, logTarefa.getNovoRespTarefa());
 				stmUpdateTarefa.setInt(3, logTarefa.getTarefa().getId());

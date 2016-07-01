@@ -1,12 +1,15 @@
 package br.com.pdb.aplication;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import br.com.pdb.dao.LogTarefaDao;
 import br.com.pdb.dao.ProjetoDao;
 import br.com.pdb.dao.TarefaDao;
 import br.com.pdb.dao.UsuarioDao;
+import br.com.pdb.model.LogTarefa;
 import br.com.pdb.model.Projeto;
 import br.com.pdb.model.Tarefa;
 import br.com.pdb.model.Usuario;
@@ -23,87 +26,16 @@ public class Aplicacao {
 		
 		abrirTarefas();
 		
+		manipularTarefa1();
 		
+		manipularTarefa2();
 		
-		//Testando o DAO da Tarefa
-//		Tarefa tarefa = new Tarefa();
-//		tarefa.setTitulo("TesteTitulo");
-//		tarefa.setDescricao("TesteDescrição");
-//		tarefa.setProgresso(30);
-//		Date data_abertura = new Date();
-//		tarefa.setData_abertura(data_abertura);
-//		tarefa.setData_fechamento(null);
-//		Projeto projeto = new Projeto();
-//		projeto.setId_projeto(1);
-//		tarefa.setProjeto(projeto);
-//		Usuario usuario_abertura = new Usuario();
-//		usuario_abertura.setId_usuario(1);
-//		tarefa.setUsuario_abertura(usuario_abertura);
-//		tarefa.setUsuario_fechamento(null);
-//		
-//		
-//		Tarefa tarefaNova = new Tarefa();
-//		tarefaNova.setTitulo("TesteTituloNovo");
-//		tarefaNova.setDescricao("TesteDescriçãoNova");
-//		tarefaNova.setProgresso(30);
-//		Date data_abertura_nova = new Date();
-//		tarefaNova.setData_abertura(data_abertura_nova);
-//		tarefaNova.setData_fechamento(null);
-//		Projeto projetoNovo = new Projeto();
-//		projeto.setId_projeto(1);
-//		tarefaNova.setProjeto(projetoNovo);
-//		Usuario usuario_abertura_novo = new Usuario();
-//		usuario_abertura.setId_usuario(1);
-//		tarefaNova.setUsuario_abertura(usuario_abertura_novo);
-//		tarefaNova.setUsuario_fechamento(null);
-//		
-//		TarefaDao tdao = new TarefaDao();
-//		
-//		try {
-//			tdao.inserirTarefa(tarefa);
-//			tdao.inserirTarefa(tarefaNova);
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
-		/*try {
-			Tarefa tarefaBusca = new Tarefa();
-			tarefaBusca = tdao.buscarTarefaPorId(1);
-			System.out.println("Essa tarefa "+tarefaBusca.getTitulo());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
-		
-	/*	try {
-			Tarefa tarefaAtualizacao = tarefaNova;
-			tarefaAtualizacao.setTitulo("TituloAtualizado");
-			tarefaAtualizacao.setDescricao("DescriçãoAtualizada");
-			Date data_fechamento = new Date(System.currentTimeMillis());
-			tarefaAtualizacao.setData_fechamento(data_fechamento);
-			Usuario usuarioFechamento = new Usuario();
-			usuarioFechamento.setId_usuario(-1);
-			tarefaAtualizacao.setUsuario_fechamento(usuarioFechamento);
-			tdao.atualizarTarefa(2, tarefaAtualizacao);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
-		/*try {
-			tdao.removerTarefa(2);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
-		
-	
-		
+		System.out.println("Fim das interações");
 	}
 	
+
+
+
 
 	private static void criaObjetos() {
 		try {
@@ -205,6 +137,168 @@ public class Aplicacao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private static void manipularTarefa1() {
+		LogTarefaDao lDao = new LogTarefaDao();
+		TarefaDao tDao = new TarefaDao();
+		try {
+			Tarefa tarefa = tDao.buscarTarefaPorId(1);
+			
+			LogTarefa logTarefa = new LogTarefa();
+			
+			logTarefa.setNovoRespTarefa(1);
+			logTarefa.setTarefa(tarefa);
+			logTarefa.setPorcetagemTarefa(30);
+			logTarefa.setMensagemLog("Mensagem Log 30%");
+			
+			lDao.inserirLogTarefa(logTarefa);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//log2
+		try {
+			Tarefa tarefa = tDao.buscarTarefaPorId(1);
+			
+			LogTarefa logTarefa = new LogTarefa();
+			
+			logTarefa.setNovoRespTarefa(1);
+			logTarefa.setTarefa(tarefa);
+			logTarefa.setPorcetagemTarefa(100);
+			logTarefa.setMensagemLog("Mensagem Log 100%");
+			
+			lDao.inserirLogTarefa(logTarefa);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			Tarefa tarefa = tDao.buscarTarefaPorId(1);
+			
+			if(tarefa.getProgresso() == 100)
+				imrpimirTarefa(tarefa);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private static void manipularTarefa2() {
+		LogTarefaDao lDao = new LogTarefaDao();
+		TarefaDao tDao = new TarefaDao();
+		try {
+			Tarefa tarefa = tDao.buscarTarefaPorId(1);
+			
+			LogTarefa logTarefa = new LogTarefa();
+			
+			logTarefa.setNovoRespTarefa(1);
+			logTarefa.setTarefa(tarefa);
+			logTarefa.setPorcetagemTarefa(30);
+			logTarefa.setMensagemLog("Mensagem Log 30%");
+			
+			lDao.inserirLogTarefa(logTarefa);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//log Altera usuario
+		try {
+			Tarefa tarefa = tDao.buscarTarefaPorId(1);
+			
+			LogTarefa logTarefa = new LogTarefa();
+			
+			logTarefa.setNovoRespTarefa(2);
+			logTarefa.setTarefa(tarefa);
+			logTarefa.setPorcetagemTarefa(30);
+			logTarefa.setMensagemLog("Alteração usuário");
+			
+			lDao.inserirLogTarefa(logTarefa);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			Tarefa tarefa = tDao.buscarTarefaPorId(1);
+			
+			if(tarefa.getProgresso() == 100)
+				imrpimirTarefa(tarefa);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//log 3 100%
+		try {
+			Tarefa tarefa = tDao.buscarTarefaPorId(1);
+			
+			LogTarefa logTarefa = new LogTarefa();
+			
+			logTarefa.setNovoRespTarefa(2);
+			logTarefa.setTarefa(tarefa);
+			logTarefa.setPorcetagemTarefa(100);
+			logTarefa.setMensagemLog("Mensagem Log 100%");
+			
+			lDao.inserirLogTarefa(logTarefa);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			Tarefa tarefa = tDao.buscarTarefaPorId(1);
+			
+			if(tarefa.getProgresso() == 100)
+				imrpimirTarefa(tarefa);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+	private static void imrpimirTarefa(Tarefa tarefa)  {
+		
+		SimpleDateFormat dt = new SimpleDateFormat("dd-mm-yyyy"); 
+		
+		UsuarioDao uDao = new UsuarioDao();
+		Usuario usuario = new Usuario();
+		usuario.setId(tarefa.getUsuarioResponsavel().getId());
+		usuario = uDao.buscarUsuario(usuario);
+		
+		System.out.println("Titulo: " + tarefa.getTitulo());
+		System.out.println("Descrição: " + tarefa.getDescricao());
+		System.out.println("Progresso: " + tarefa.getProgresso());
+		
+		try {
+			System.out.println("Aberta em: " + dt.parse(tarefa.getDataAbertura().toString()));
+			System.out.println("Finalizada em: " + dt.parse(tarefa.getDataFechamento().toString()));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Usuario que finalizou: " + usuario.getNome());
+		System.out.println("\n---------------------------------------------");
 	}
 
 	

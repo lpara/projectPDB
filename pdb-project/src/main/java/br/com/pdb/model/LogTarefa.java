@@ -14,6 +14,7 @@ public class LogTarefa {
 	private Tarefa tarefa;
 	private int porcetagemTarefa;
 	private int novoRespTarefa;
+	private String mensagemLog;
 
 	public int getId() {
 		return id;
@@ -45,6 +46,14 @@ public class LogTarefa {
 
 	public void setNovoRespTarefa(int novoRespTarefa) {
 		this.novoRespTarefa = novoRespTarefa;
+	}
+
+	public String getMensagemLog() {
+		return mensagemLog;
+	}
+
+	public void setMensagemLog(String mensagemLog) {
+		this.mensagemLog = mensagemLog;
 	}
 
 }
