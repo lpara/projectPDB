@@ -142,18 +142,22 @@ public class Aplicacao {
 	private static void manipularTarefa1() {
 		LogTarefaDao lDao = new LogTarefaDao();
 		TarefaDao tDao = new TarefaDao();
+		String tituloTarefa = "Tarefa 01";
 		try {
-			Tarefa tarefa = tDao.buscarTarefaPorId(1);
+			Tarefa tarefa = tDao.buscarTarefaPorTitulo(tituloTarefa);
 			
-			LogTarefa logTarefa = new LogTarefa();
-			
-			logTarefa.setNovoRespTarefa(1);
-			logTarefa.setTarefa(tarefa);
-			logTarefa.setPorcetagemTarefa(30);
-			logTarefa.setMensagemLog("Mensagem Log 30%");
-			
-			lDao.inserirLogTarefa(logTarefa);
-			
+			if(tarefa != null){
+				LogTarefa logTarefa = new LogTarefa();
+				
+				logTarefa.setNovoRespTarefa(tarefa.getUsuarioResponsavel().getId());
+				logTarefa.setTarefa(tarefa);
+				logTarefa.setPorcetagemTarefa(30);
+				logTarefa.setMensagemLog("Mensagem Log 30%");
+				
+				lDao.inserirLogTarefa(logTarefa);
+			}else{
+				System.out.println("Tarefa com titulo '"+tituloTarefa+ "' não encontrada para registrar o log.");
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -162,17 +166,20 @@ public class Aplicacao {
 		
 		//log2
 		try {
-			Tarefa tarefa = tDao.buscarTarefaPorId(1);
+			Tarefa tarefa = tDao.buscarTarefaPorTitulo(tituloTarefa);
 			
-			LogTarefa logTarefa = new LogTarefa();
-			
-			logTarefa.setNovoRespTarefa(1);
-			logTarefa.setTarefa(tarefa);
-			logTarefa.setPorcetagemTarefa(100);
-			logTarefa.setMensagemLog("Mensagem Log 100%");
-			
-			lDao.inserirLogTarefa(logTarefa);
-			
+			if(tarefa != null){
+				LogTarefa logTarefa = new LogTarefa();
+				
+				logTarefa.setNovoRespTarefa(tarefa.getUsuarioResponsavel().getId());
+				logTarefa.setTarefa(tarefa);
+				logTarefa.setPorcetagemTarefa(100);
+				logTarefa.setMensagemLog("Mensagem Log 100%");
+				
+				lDao.inserirLogTarefa(logTarefa);
+			}else{
+				System.out.println("Tarefa com titulo '"+tituloTarefa+ "' não encontrada para registrar o log.");
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -180,11 +187,14 @@ public class Aplicacao {
 		}
 		
 		try {
-			Tarefa tarefa = tDao.buscarTarefaPorId(1);
+			Tarefa tarefa = tDao.buscarTarefaPorTitulo(tituloTarefa);
 			
-			if(tarefa.getProgresso() == 100)
-				imrpimirTarefa(tarefa);
-			
+			if(tarefa != null){
+				if(tarefa.getProgresso() == 100)
+					imrpimirTarefa(tarefa);
+			}else{
+				System.out.println("Tarefa com titulo '"+tituloTarefa+ "' não encontrada");
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -195,18 +205,22 @@ public class Aplicacao {
 	private static void manipularTarefa2() {
 		LogTarefaDao lDao = new LogTarefaDao();
 		TarefaDao tDao = new TarefaDao();
+		String tituloTarefa = "Tarefa 02";
 		try {
-			Tarefa tarefa = tDao.buscarTarefaPorId(1);
+			Tarefa tarefa = tDao.buscarTarefaPorTitulo(tituloTarefa);
 			
-			LogTarefa logTarefa = new LogTarefa();
-			
-			logTarefa.setNovoRespTarefa(1);
-			logTarefa.setTarefa(tarefa);
-			logTarefa.setPorcetagemTarefa(30);
-			logTarefa.setMensagemLog("Mensagem Log 30%");
-			
-			lDao.inserirLogTarefa(logTarefa);
-			
+			if(tarefa != null){
+				LogTarefa logTarefa = new LogTarefa();
+				
+				logTarefa.setNovoRespTarefa(1);
+				logTarefa.setTarefa(tarefa);
+				logTarefa.setPorcetagemTarefa(30);
+				logTarefa.setMensagemLog("Mensagem Log 30%");
+				
+				lDao.inserirLogTarefa(logTarefa);
+			}else{
+				System.out.println("Tarefa com titulo '"+tituloTarefa+ "' não encontrada para registrar o log.");
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -215,17 +229,20 @@ public class Aplicacao {
 		
 		//log Altera usuario
 		try {
-			Tarefa tarefa = tDao.buscarTarefaPorId(1);
+			Tarefa tarefa = tDao.buscarTarefaPorTitulo(tituloTarefa);
 			
-			LogTarefa logTarefa = new LogTarefa();
-			
-			logTarefa.setNovoRespTarefa(2);
-			logTarefa.setTarefa(tarefa);
-			logTarefa.setPorcetagemTarefa(30);
-			logTarefa.setMensagemLog("Alteração usuário");
-			
-			lDao.inserirLogTarefa(logTarefa);
-			
+			if(tarefa != null){
+				LogTarefa logTarefa = new LogTarefa();
+				
+				logTarefa.setNovoRespTarefa(2);
+				logTarefa.setTarefa(tarefa);
+				logTarefa.setPorcetagemTarefa(30);
+				logTarefa.setMensagemLog("Alteração usuário");
+				
+				lDao.inserirLogTarefa(logTarefa);
+			}else{
+				System.out.println("Tarefa com titulo '"+tituloTarefa+ "' não encontrada para registrar o log.");
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -233,11 +250,14 @@ public class Aplicacao {
 		}
 		
 		try {
-			Tarefa tarefa = tDao.buscarTarefaPorId(1);
+			Tarefa tarefa = tDao.buscarTarefaPorTitulo(tituloTarefa);
 			
-			if(tarefa.getProgresso() == 100)
-				imrpimirTarefa(tarefa);
-			
+			if(tarefa != null){
+				if(tarefa.getProgresso() == 100)
+					imrpimirTarefa(tarefa);
+			}else{
+				System.out.println("Tarefa com titulo '"+tituloTarefa+ "' não encontrada.");
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -246,17 +266,20 @@ public class Aplicacao {
 		
 		//log 3 100%
 		try {
-			Tarefa tarefa = tDao.buscarTarefaPorId(1);
+			Tarefa tarefa = tDao.buscarTarefaPorTitulo(tituloTarefa);
 			
-			LogTarefa logTarefa = new LogTarefa();
-			
-			logTarefa.setNovoRespTarefa(2);
-			logTarefa.setTarefa(tarefa);
-			logTarefa.setPorcetagemTarefa(100);
-			logTarefa.setMensagemLog("Mensagem Log 100%");
-			
-			lDao.inserirLogTarefa(logTarefa);
-			
+			if(tarefa != null){
+				LogTarefa logTarefa = new LogTarefa();
+				
+				logTarefa.setNovoRespTarefa(2);
+				logTarefa.setTarefa(tarefa);
+				logTarefa.setPorcetagemTarefa(100);
+				logTarefa.setMensagemLog("Mensagem Log 100%");
+				
+				lDao.inserirLogTarefa(logTarefa);
+			}else{
+				System.out.println("Tarefa com titulo '"+tituloTarefa+ "' não encontrada para registrar o log.");
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -264,11 +287,14 @@ public class Aplicacao {
 		}
 		
 		try {
-			Tarefa tarefa = tDao.buscarTarefaPorId(1);
+			Tarefa tarefa = tDao.buscarTarefaPorTitulo(tituloTarefa);
 			
-			if(tarefa.getProgresso() == 100)
-				imrpimirTarefa(tarefa);
-			
+			if(tarefa != null){
+				if(tarefa.getProgresso() == 100)
+					imrpimirTarefa(tarefa);
+			}else{
+				System.out.println("Tarefa com titulo '"+tituloTarefa+ "' não encontrada.");
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

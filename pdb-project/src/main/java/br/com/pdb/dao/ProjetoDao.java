@@ -50,7 +50,7 @@ public class ProjetoDao extends GenericDao {
 			
 			stm.executeUpdate();
 			
-			System.out.println("Inserção realizada com sucesso!");
+			System.out.println("Projeto "+projeto.getDescricao()+" cadastrado com sucesso!");
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

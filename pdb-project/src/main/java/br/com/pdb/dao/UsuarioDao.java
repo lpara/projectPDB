@@ -43,7 +43,7 @@ public class UsuarioDao extends GenericDao {
 			
 			stm.executeUpdate();
 			
-			System.out.println("Inserção realizada com sucesso!");
+			System.out.println("Usuário "+usuario.getNome()+" cadastrado com sucesso!");
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

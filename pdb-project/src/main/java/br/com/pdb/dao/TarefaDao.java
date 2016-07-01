@@ -63,7 +63,7 @@ public class TarefaDao extends GenericDao {
 		
 		stm.executeUpdate();
 		
-		System.out.println("Inserção realizada com sucesso!");
+		System.out.println("Tarefa "+tarefa.getTitulo()+ " cadastrada com sucesso!");
 		connection.close();
 	}
 	
@@ -78,6 +78,48 @@ public class TarefaDao extends GenericDao {
 		
 		PreparedStatement stm = connection.prepareStatement("SELECT * FROM public.tarefa WHERE id_tarefa = ?");
 		stm.setInt(1, id);
+		
+		ResultSet rs = stm.executeQuery();
+		while(rs.next()){
+			tarefa.setId(rs.getInt("id_tarefa"));
+			tarefa.setTitulo(rs.getString("titulo"));
+			tarefa.setDescricao(rs.getString("descricao"));
+			tarefa.setDataAbertura(rs.getDate("data_abertura"));
+			tarefa.setDataFechamento(rs.getDate("data_fechamento"));
+			tarefa.setProgresso(rs.getInt("progresso"));
+			Projeto projeto = new Projeto();
+			projeto.setIdProjeto(rs.getInt("id_projeto"));
+			tarefa.setProjeto(projeto);
+			Usuario usuarioAbertura = new Usuario();
+			usuarioAbertura.setId(rs.getInt("id_usuario_abertura"));
+			tarefa.setUsuarioAbertura(usuarioAbertura);
+			Usuario usuarioFechamento = new Usuario();
+			usuarioFechamento.setId(rs.getInt("id_usuario_fechamento"));
+			tarefa.setUsuarioFechamento(usuarioFechamento);
+			if(rs.getString("id_usuario_fechamento") != null){
+				Usuario usuarioResponsavel = new Usuario();
+				usuarioResponsavel.setId(rs.getInt("id_usuario_fechamento"));
+				tarefa.setUsuarioResponsavel(usuarioResponsavel);
+			}
+			
+		}
+		
+		connection.close();
+		return tarefa;
+
+	}
+	
+	/*
+	 * Método que busca uma tarefa pelo identificador
+	 */
+	public Tarefa buscarTarefaPorTitulo(String titulo) throws SQLException{
+		
+		Tarefa tarefa = new Tarefa();
+		
+		Connection connection = getConnection();
+		
+		PreparedStatement stm = connection.prepareStatement("SELECT * FROM public.tarefa WHERE titulo = ? limit 1");
+		stm.setString(1, titulo);
 		
 		ResultSet rs = stm.executeQuery();
 		while(rs.next()){

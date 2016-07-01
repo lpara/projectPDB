@@ -75,7 +75,7 @@ public class LogTarefaDao extends GenericDao {
 			}
 			stmUpdateTarefa.executeUpdate();
 			
-			System.out.println("Inserção realizada com sucesso!");
+			System.out.println("Log cadastrado com sucesso!");
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
