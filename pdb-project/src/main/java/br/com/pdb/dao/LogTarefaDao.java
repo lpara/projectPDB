@@ -53,28 +53,34 @@ public class LogTarefaDao extends GenericDao {
 			
 			stm.executeUpdate();
 			
-			//chama metodo para atualizar a tarefa pelo log
-			String updateSql = "UPDATE public.tarefa SET progresso = ? ";
-			if(logTarefa.getNovoRespTarefa() > 0 && logTarefa.getPorcetagemTarefa() == 100)
-				updateSql += ", id_usuario_responsavel = ? , id_usuario_fechamento = ?, data_fechamento = ? ";
-			else if(logTarefa.getNovoRespTarefa() > 0)
-				updateSql += ", id_usuario_responsavel = ? ";
-					
-			PreparedStatement stmUpdateTarefa = connection.prepareStatement(updateSql+"WHERE id_tarefa = ?");
-			
-			stmUpdateTarefa.setInt(1, logTarefa.getPorcetagemTarefa());
-			if(logTarefa.getNovoRespTarefa() > 0 && logTarefa.getPorcetagemTarefa() == 100){
-				stmUpdateTarefa.setInt(2, logTarefa.getNovoRespTarefa());
-				stmUpdateTarefa.setInt(3, logTarefa.getNovoRespTarefa());
-				Date hoje = new Date();
-				stmUpdateTarefa.setDate(4, new java.sql.Date(hoje.getTime()));
-				stmUpdateTarefa.setInt(5, logTarefa.getTarefa().getId());
-			}else if(logTarefa.getNovoRespTarefa() > 0){
-				stmUpdateTarefa.setInt(2, logTarefa.getNovoRespTarefa());
-				stmUpdateTarefa.setInt(3, logTarefa.getTarefa().getId());
+			try{
+				connection.setAutoCommit(false);
+				//chama metodo para atualizar a tarefa pelo log
+				String updateSql = "UPDATE public.tarefa SET progresso = ? ";
+				if(logTarefa.getNovoRespTarefa() > 0 && logTarefa.getPorcetagemTarefa() == 100)
+					updateSql += ", id_usuario_responsavel = ? , id_usuario_fechamento = ?, data_fechamento = ? ";
+				else if(logTarefa.getNovoRespTarefa() > 0)
+					updateSql += ", id_usuario_responsavel = ? ";
+						
+				PreparedStatement stmUpdateTarefa = connection.prepareStatement(updateSql+"WHERE id_tarefa = ?");
+				
+				stmUpdateTarefa.setInt(1, logTarefa.getPorcetagemTarefa());
+				if(logTarefa.getNovoRespTarefa() > 0 && logTarefa.getPorcetagemTarefa() == 100){
+					stmUpdateTarefa.setInt(2, logTarefa.getNovoRespTarefa());
+					stmUpdateTarefa.setInt(3, logTarefa.getNovoRespTarefa());
+					Date hoje = new Date();
+					stmUpdateTarefa.setDate(4, new java.sql.Date(hoje.getTime()));
+					stmUpdateTarefa.setInt(5, logTarefa.getTarefa().getId());
+				}else if(logTarefa.getNovoRespTarefa() > 0){
+					stmUpdateTarefa.setInt(2, logTarefa.getNovoRespTarefa());
+					stmUpdateTarefa.setInt(3, logTarefa.getTarefa().getId());
+				}
+				stmUpdateTarefa.executeUpdate();
+				connection.commit();
+			}catch (SQLException e){
+				e.printStackTrace();
+				connection.rollback();
 			}
-			stmUpdateTarefa.executeUpdate();
-			
 			System.out.println("Log cadastrado com sucesso!");
 			connection.close();
 		} catch (SQLException e) {
